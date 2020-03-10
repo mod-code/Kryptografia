@@ -1,0 +1,177 @@
+WindowManager:
+    OknoMenu:
+    OknoSzyfrMor:
+    OknoSzyfrCK:
+
+
+
+<OknoMenu>:         # Okno menu głównego
+    name: "menu"
+
+    GridLayout:
+        cols:1
+
+        Label:
+            text: u"Wybierz metod\u0119\n   szyfrowania:" # "Wybierz metodę szyfrowania:"
+            font_size: 60
+
+        GridLayout:
+            cols:2
+            spacing: 5
+            padding: 10
+
+            Button:
+                text:"Szyfrowanie Morsem"
+                on_release:
+                    app.root.current = "szyfrMor"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text:"Szyfrowanie X"
+                on_release:
+                    app.root.current = "szyfrMor"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text:"Szyfrowanie Cezara - Klasyczne"
+                on_release:
+                    app.root.current = "szyfrCezK"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text:"Szyfrowanie Cezara - Liczbowe"
+                on_release:
+                    app.root.current = "szyfrMor"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text:"Szyfrowanie Y"
+                on_release:
+                    app.root.current = "szyfrMor"
+                    root.manager.transition.direction = "left"
+
+            Button:
+                text:"Szyfrowanie Z"
+                on_release:
+                    app.root.current = "szyfrMor"
+                    root.manager.transition.direction = "left"
+
+        Label:
+            #text: "Projekt 2020 - Programowanie Obiektowe II\nPolitechnika Krakowska\n\n Michał Odrzywołek, Wojciech Strzeboński"
+            text: u"Projekt 2020 - Programowanie Obiektowe II\nPolitechnika Krakowska\n\n Micha\u0142 Odrzywo\u0142ek, Wojciech Strzebo\u0144ski"
+
+
+# SZYFROWANIE MORSEM
+
+<OknoSzyfrMor>:
+    name: "szyfrMor"
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+        pos: 0, 0
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst nieszyfrowany: "
+            TextInput:
+                multinline: False
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst zaszyfrowany: "
+            TextInput:
+                multiline: False
+
+        GridLayout:
+            cols:1
+            Label:
+                text:""
+
+            GridLayout:
+                cols:2
+                Button:
+                    text: "Szyfruj"
+                    on_release:
+                        pass
+                Button:
+                    text: "Deszyfruj"
+                    on_release:
+                        pass
+
+            Button:
+                text: "<<< Menu"
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+
+            Label:
+                text:""
+
+
+# SZYFROWANIE CEZARA - KLASYCZNE
+
+<OknoSzyfrCK>:
+    name: "szyfrCezK"
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+        pos: 0, 0
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst nieszyfrowany: "
+            TextInput:
+                multinline: True
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst zaszyfrowany: "
+            TextInput:
+                multiline: True
+
+        GridLayout:
+            cols:1
+            GridLayout:
+                cols:2
+                Label:
+                    text: "KLUCZ:"
+
+                GridLayout:
+                    cols:3
+                    Label:
+                        text: ""
+                    TextInput:
+                        multiline: False
+                        font_size:20
+                        halign: 'center'
+                        valign: 'middle'
+                        background_color: 0.4,0.9,0.5,1
+                    Label:
+                        text: ""
+
+
+            GridLayout:
+                cols:2
+
+                Button:
+                    text: "Szyfruj"
+                    on_release:
+                        pass
+                Button:
+                    text: "Deszyfruj"
+                    on_release:
+                        pass
+
+            Button:
+                text: "<<< Menu"
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+
+            Label:
+                text:""
+
