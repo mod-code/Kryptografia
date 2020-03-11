@@ -1,11 +1,10 @@
 WindowManager:
-    OknoMenu:
-    OknoSzyfrMor:
-    OknoSzyfrCK:
+    WindowMenu:
+    WindowMorse:
+    WindowCK:
 
 
-
-<OknoMenu>:         # Okno menu głównego
+<WindowMenu>:         # Okno menu głównego
     name: "menu"
 
     GridLayout:
@@ -23,37 +22,37 @@ WindowManager:
             Button:
                 text:"Szyfrowanie Morsem"
                 on_release:
-                    app.root.current = "szyfrMor"
+                    app.root.current = "win_morse"
                     root.manager.transition.direction = "left"
 
             Button:
                 text:"Szyfrowanie X"
                 on_release:
-                    app.root.current = "szyfrMor"
+                    app.root.current = "win_morse"
                     root.manager.transition.direction = "left"
 
             Button:
                 text:"Szyfrowanie Cezara - Klasyczne"
                 on_release:
-                    app.root.current = "szyfrCezK"
+                    app.root.current = "win_ck"
                     root.manager.transition.direction = "left"
 
             Button:
                 text:"Szyfrowanie Cezara - Liczbowe"
                 on_release:
-                    app.root.current = "szyfrMor"
+                    app.root.current = "win_ck"
                     root.manager.transition.direction = "left"
 
             Button:
                 text:"Szyfrowanie Y"
                 on_release:
-                    app.root.current = "szyfrMor"
+                    app.root.current = "win_morse"
                     root.manager.transition.direction = "left"
 
             Button:
                 text:"Szyfrowanie Z"
                 on_release:
-                    app.root.current = "szyfrMor"
+                    app.root.current = "win_morse"
                     root.manager.transition.direction = "left"
 
         Label:
@@ -61,10 +60,10 @@ WindowManager:
             text: u"Projekt 2020 - Programowanie Obiektowe II\nPolitechnika Krakowska\n\n Micha\u0142 Odrzywo\u0142ek, Wojciech Strzebo\u0144ski"
 
 
-# SZYFROWANIE MORSEM
+# OKNO: SZYFR MORSE
 
-<OknoSzyfrMor>:
-    name: "szyfrMor"
+<WindowMorse>:
+    name: "win_morse"
     GridLayout:
         cols:1
         size: root.width, root.height
@@ -110,10 +109,10 @@ WindowManager:
                 text:""
 
 
-# SZYFROWANIE CEZARA - KLASYCZNE
+# OKNO: SZYFR CEZARA - KLASYCZNE
 
-<OknoSzyfrCK>:
-    name: "szyfrCezK"
+<WindowCK>:
+    name: "win_ck"
     GridLayout:
         cols:1
         size: root.width, root.height

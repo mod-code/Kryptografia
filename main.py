@@ -2,18 +2,21 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-class OknoMenu(Screen):
+# KLASY OKIEN
+
+class WindowMenu(Screen):
 	pass
 
-class OknoSzyfrMor(Screen):
+class WindowMorse(Screen):
 	pass
 
-class OknoSzyfrCK(Screen):
+class WindowCK(Screen):
 	pass
 
 class WindowManager(ScreenManager):
 	pass
 
+# Wczytanie pliku interfejsu (w języku kv)
 kv = Builder.load_file("ui.kv")
 
 
