@@ -1,4 +1,4 @@
 # Szyft Cezara - Klasyczny
 
-class szyfrCK:
+class CipherCK:
 	pass
