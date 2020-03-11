@@ -46,7 +46,7 @@ class Morse:
     @staticmethod
     def decrypt(words):
 
-        decypretMessage = ''
+        decryptedMessage = ''
         buff = ''
 
         for char in words:
@@ -58,11 +58,11 @@ class Morse:
                 spaces_counter += 1  # licznik zwiększany w celu zasygnalizowania nowego znaku
 
                 if spaces_counter == 2:  # warunek sprawdzający czy nie wystąpiło nowe słowo
-                    decypretMessage += ' '  # dodanie spacji do odzielenia słowa
+                    decryptedMessage += ' '  # dodanie spacji do odzielenia słowa
 
                 else:
                     try:
-                        decypretMessage += Morse.__INVERSE_MORSE_DICT[buff]
+                        decryptedMessage += Morse.__INVERSE_MORSE_DICT[buff]
 
                     except KeyError:
                         print(" *** WPROWADZONA WIADOMOŚĆ ZAWIERA NIEPRAWIDŁOWY ZNAK! *** ")
@@ -71,16 +71,4 @@ class Morse:
                     finally:
                         buff = ''  # czyszczenie buffora znaków
 
-        return decypretMessage
-
-
-message = "@"
-print("Wiadomość przed zakodowaniem")
-print(message)
-print("")
-print("Wiadomość po zakodowaniu")
-encrypted_message = Morse.encrypt(message)
-print(encrypted_message)
-print("")
-print("Wiadomość po odkodowaniu")
-print(Morse.decrypt(encrypted_message))
+        return decryptedMessage
