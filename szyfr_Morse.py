@@ -26,11 +26,18 @@ class Morse:
     @staticmethod
     def encrypt(words):
 
-        mess = words.upper() # zabezpieczenie przed wprowadzeniem małych liter
+        mess = words.upper()  # zabezpieczenie przed wprowadzeniem małych liter
         encryptedMessage = ''
+
         for char in mess:
             if char != ' ':  # jeśli znak nie jest spacją
-                encryptedMessage += Morse.__MORSE_CODE_DICT[char] + ' '  # dodaj znak w kodzie morsa ze spacją
+                try:
+                    encryptedMessage += Morse.__MORSE_CODE_DICT[char] + ' '  # dodaj znak w kodzie morsa ze spacją
+
+                except KeyError:
+                    print(" *** WPROWADZONA WIADOMOŚĆ ZAWIERA NIEPRAWIDŁOWY ZNAK! *** ")
+                    return ''
+
             else:
                 encryptedMessage += ' '  # dodaj spację
 
@@ -38,28 +45,36 @@ class Morse:
 
     @staticmethod
     def decrypt(words):
+
         decypretMessage = ''
         buff = ''
 
         for char in words:
-
             if char != ' ':  # jeśli znak nie jest spacją
                 spaces_counter = 0  # zmienna pomocnicza - reset licznika wystąpienia spacji
                 buff += char  # zmienna pomocnicza przechowująca znak z Morsea
 
-            else: # gdy znak to spacja
-                spaces_counter += 1 # licznik zwiększany w celu zasygnalizowania nowego znaku
+            else:  # gdy znak to spacja
+                spaces_counter += 1  # licznik zwiększany w celu zasygnalizowania nowego znaku
 
-                if  spaces_counter == 2: # warunek sprawdzający czy nie wystąpiło nowe słowo
-                    decypretMessage += ' ' # dodanie spacji do odzielenia słowa
+                if spaces_counter == 2:  # warunek sprawdzający czy nie wystąpiło nowe słowo
+                    decypretMessage += ' '  # dodanie spacji do odzielenia słowa
 
                 else:
-                    decypretMessage += Morse.__INVERSE_MORSE_DICT[buff]
-                    buff = '' # czyszczenie buffora znaków
+                    try:
+                        decypretMessage += Morse.__INVERSE_MORSE_DICT[buff]
+
+                    except KeyError:
+                        print(" *** WPROWADZONA WIADOMOŚĆ ZAWIERA NIEPRAWIDŁOWY ZNAK! *** ")
+                        return ''
+
+                    finally:
+                        buff = ''  # czyszczenie buffora znaków
 
         return decypretMessage
 
-message = "WOJTEK JEST LEPSZY W PYTHONA NIŻ ODRZY :)"
+
+message = "@"
 print("Wiadomość przed zakodowaniem")
 print(message)
 print("")
