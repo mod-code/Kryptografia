@@ -17,7 +17,7 @@ class CK:
 				key_value += ord(key_char)
 			key = key_value
 
-		special = {' ', ',', '.', '?', '!', '/', '-', '(', ')'}
+		special = {' ', ',', '.', '?', '!', '/', '-', '(', ')', '#'}
 
 		for char in words:
 			if char not in special:  # jeśli znak nie jest znakiem specjalnym
@@ -53,6 +53,8 @@ class CK:
 				encryptedMessage += '('
 			elif char == ')':
 				encryptedMessage += ')'
+			elif char == '#':
+				encryptedMessage += '#'
 
 		return encryptedMessage
 
@@ -61,6 +63,8 @@ class CK:
 		try:
 			key = int(key)
 		except NameError:
+			key = ord(key)
+		except ValueError:
 			key = ord(key)
 
 		return cls.encrypt(words, - key)

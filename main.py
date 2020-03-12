@@ -18,9 +18,17 @@ class WindowMenu(Screen):
 class WindowMorse(Screen):
 	c_input = ObjectProperty(None)
 	c_output = ObjectProperty(None)
+	err_msg = ObjectProperty(None)
+
+	def error_mess(self):
+		self.err_msg.text = "Wykryto nieoczekiwany znak specjalny!"
 
 	def btn_input(self):
 		self.c_output.text = cipher_Morse.Morse.encrypt(self.c_input.text)
+		if self.c_output.text == "":
+			self.err_msg.text = "Wykryto brak kodu lub nieoczekiwany znak specjalny!"
+		else:
+			self.err_msg.text = ""
 
 	def btn_output(self):
 		self.c_input.text = cipher_Morse.Morse.decrypt(self.c_output.text)

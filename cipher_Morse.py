@@ -38,7 +38,7 @@ class Morse:
                     encryptedMessage += Morse.__MORSE_CODE_DICT[char] + ' '  # dodaj znak w kodzie morsa ze spacją
 
                 except KeyError:
-                    print(" *** WPROWADZONA WIADOMOŚĆ ZAWIERA NIEPRAWIDŁOWY ZNAK! *** ")
+                    # print(" *** WPROWADZONA WIADOMOŚĆ ZAWIERA NIEPRAWIDŁOWY ZNAK! *** ")
                     return ''
 
             else:
@@ -58,6 +58,7 @@ class Morse:
                 buff += char  # zmienna pomocnicza przechowująca znak z Morsea
 
             else:  # gdy znak to spacja
+                # spaces_counter = 0
                 spaces_counter += 1  # licznik zwiększany w celu zasygnalizowania nowego znaku
 
                 if spaces_counter == 2:  # warunek sprawdzający czy nie wystąpiło nowe słowo

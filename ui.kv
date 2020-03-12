@@ -26,7 +26,7 @@ WindowManager:
                     root.manager.transition.direction = "left"
 
             Button:
-                text:"Szyfrowanie X"
+                text:"Szyfrowanie RSA"
                 on_release:
                     app.root.current = "win_morse"
                     root.manager.transition.direction = "left"
@@ -67,6 +67,7 @@ WindowManager:
 
     c_input: c_input
     c_output: c_output
+    err_msg: err_msg
 
     GridLayout:
         cols:1
@@ -92,6 +93,8 @@ WindowManager:
         GridLayout:
             cols:1
             Label:
+                id: err_msg
+                color: 1, 0.1, 0.1, 1
                 text:""
 
             GridLayout:
@@ -112,7 +115,7 @@ WindowManager:
                     root.manager.transition.direction = "right"
 
             Label:
-                text:""
+                text:"Szyfrowanie Morsem"
 
 
 # OKNO: SZYFR CEZARA - KLASYCZNE
@@ -195,5 +198,5 @@ WindowManager:
                     root.manager.transition.direction = "right"
 
             Label:
-                text:""
+                text:"Szyfrowanie Cezara - Klasyczne"
 
