@@ -64,6 +64,10 @@ WindowManager:
 
 <WindowMorse>:
     name: "win_morse"
+
+    c_input: c_input
+    c_output: c_output
+
     GridLayout:
         cols:1
         size: root.width, root.height
@@ -74,14 +78,16 @@ WindowManager:
             Label:
                 text: "Tekst nieszyfrowany: "
             TextInput:
-                multinline: False
+                id: c_input
+                multinline: True
 
         GridLayout:
             cols:2
             Label:
                 text: "Tekst zaszyfrowany: "
             TextInput:
-                multiline: False
+                id: c_output
+                multiline: True
 
         GridLayout:
             cols:1
@@ -92,12 +98,12 @@ WindowManager:
                 cols:2
                 Button:
                     text: "Szyfruj"
-                    on_release:
-                        pass
+                    on_press:
+                        root.btn_input()
                 Button:
                     text: "Deszyfruj"
-                    on_release:
-                        pass
+                    on_press:
+                        root.btn_output()
 
             Button:
                 text: "<<< Menu"
@@ -113,6 +119,11 @@ WindowManager:
 
 <WindowCK>:
     name: "win_ck"
+
+    c_input: c_input
+    c_output: c_output
+    key: key
+
     GridLayout:
         cols:1
         size: root.width, root.height
@@ -123,6 +134,7 @@ WindowManager:
             Label:
                 text: "Tekst nieszyfrowany: "
             TextInput:
+                id: c_input
                 multinline: True
 
         GridLayout:
@@ -130,21 +142,32 @@ WindowManager:
             Label:
                 text: "Tekst zaszyfrowany: "
             TextInput:
+                id: c_output
                 multiline: True
 
         GridLayout:
             cols:1
             GridLayout:
                 cols:2
+
                 Label:
-                    text: "KLUCZ:"
+                    text: ""
 
                 GridLayout:
-                    cols:3
+                    cols:4
                     Label:
                         text: ""
+                    GridLayout:
+                        cols:1
+                        Label:
+                            text: "KLUCZ:"
+                        Button:
+                            text: "Generuj"
+                            on_press:
+                                root.btn_genkey()
                     TextInput:
                         multiline: False
+                        id: key
                         font_size:20
                         halign: 'center'
                         valign: 'middle'
@@ -158,12 +181,12 @@ WindowManager:
 
                 Button:
                     text: "Szyfruj"
-                    on_release:
-                        pass
+                    on_press:
+                        root.btn_input()
                 Button:
                     text: "Deszyfruj"
-                    on_release:
-                        pass
+                    on_press:
+                        root.btn_output()
 
             Button:
                 text: "<<< Menu"

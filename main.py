@@ -1,6 +1,14 @@
+import cipher_Morse
+import cipher_CK
+
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty
+from random import randint, choice
+import string
+
 
 # KLASY OKIEN
 
@@ -8,10 +16,32 @@ class WindowMenu(Screen):
 	pass
 
 class WindowMorse(Screen):
-	pass
+	c_input = ObjectProperty(None)
+	c_output = ObjectProperty(None)
+
+	def btn_input(self):
+		self.c_output.text = cipher_Morse.Morse.encrypt(self.c_input.text)
+
+	def btn_output(self):
+		self.c_input.text = cipher_Morse.Morse.decrypt(self.c_output.text)
 
 class WindowCK(Screen):
-	pass
+	c_input = ObjectProperty(None)
+	c_output = ObjectProperty(None)
+	key = ObjectProperty(None)
+
+	def btn_genkey(self):
+		self.key.text = str(randint(1000, 9999))
+
+	def btn_input(self):
+		if self.key.text == "":
+			self.key.text = "0"
+		self.c_output.text = cipher_CK.CK.encrypt(self.c_input.text, self.key.text)
+
+	def btn_output(self):
+		if self.key.text == "":
+			self.key.text = "0"
+		self.c_input.text = cipher_CK.CK.decrypt(self.c_output.text, self.key.text)
 
 class WindowManager(ScreenManager):
 	pass
