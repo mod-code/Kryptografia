@@ -103,18 +103,37 @@ class RSA:
         return (e, n), (d, n)
 
     def encrypt(self, e, n, message):
+        # Każdy znak jest zamieniany według wzoru i wrzucany do listy
         message_numbers = []
-        for char in message:
-            c = int(self.character_dict[char]) ** e % n
-            message_numbers.append(c)
+        try:
+            # Gdy wprowadzona wiadomość (znaki) nie mają odpowiednika w słowniku, przerwij i zwróć None
+            for char in message:
+                c = int(self.character_dict[char]) ** e % n
+                message_numbers.append(c)
+        except KeyError:
+            print("ENCRYPTION ERROR: CHARACTER VALUE DOES NOT EXIST\n")
+            return None
+        # Gdy wszystko się uda, zwróc liste z zakodowanymi znakami w postaci liczb
         return message_numbers
 
     def decrypt(self, d, n, encrypted_message):
-        message_char_list = []
-        for number in encrypted_message:
-            c = number ** d % n
-            character = self.inverted_character_dict[c]
-            message_char_list.append(character)
-        return ''.join(message_char_list)
+        # Zabezpieczenie przed rozkodowywaniem pustej wiadomości
+        if not encrypted_message:
+            print("ENCRYPTED MESSAGE IS EMPTY!")
+            return ""
+        else:
+            message_char_list = []
+            # Odkodowywanie według wzoru
+            for number in encrypted_message:
+                c = number ** d % n
+                # Sprawdź czy odkodowana liczba jest w słowniku, jeśli nie przydziel randomowy znak
+                try:
+                    character = self.inverted_character_dict[c]
+                except KeyError:
+                    random_num = random.randrange(11, 37)
+                    character = self.inverted_character_dict[random_num]
+                message_char_list.append(character)
+            # Zwróć wiadomość jako string
+            return ''.join(message_char_list)
 
 
