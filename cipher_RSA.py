@@ -60,11 +60,18 @@ class RSA:
     def __init__(self, p, q):
         self.p = p
         self.q = q
+        self.character_dict = {
+            'A': 11, 'B': 12, 'C': 13, 'D': 14, 'E': 15, 'F': 16, 'G': 17, 'H': 18, 'I': 19,
+            'J': 20, 'K': 21, 'L': 22, 'M': 23, 'N': 24, 'O': 25, 'P': 26, 'Q': 27, 'R': 28,
+            'S': 29, 'T': 30, 'U': 31, 'V': 32, 'W': 33, 'X': 34, 'Y': 35, 'Z': 36, ' ': 37
+
+        }
+
+        self.inverted_character_dict = dict((value, key) for (key, value) in self.character_dict.items())
 
     def set_p_q(self, p, q):
         self.p = p
         self.q = q
-
 
     def generate_keypair(self):
         first_number_checker = PrimeChecker(self.p)
@@ -76,10 +83,11 @@ class RSA:
             raise ValueError('ERROR: p and q cannot be equal!')
 
         n = self.p * self.q
+        # Obliczenie funkcji Eulera
         phi_n = (self.p - 1) * (self.q - 1)
 
+        # Losowo obliczany publiczny wykładnik e. Ma być on względnie pierwszy z funkcją Eulera
         e = random.randrange(1, phi_n)
-
         gcd_checker = GcdChecker(e, phi_n)
         coprime = gcd_checker.check_numbers()
         while coprime != 1:
@@ -87,9 +95,26 @@ class RSA:
             gcd_checker.set_numbers(e, phi_n)
             coprime = gcd_checker.check_numbers()
 
+        # Obliczany wykładnik prywatny, ma być odwrotnością modulo funkcji Eulera liczby e
         EEAchecker = EEA(e, phi_n)
-        d = EEAchecker.odwr_mod()
+        d = EEAchecker.calculate()
 
+        # Pierwsza krotka to klucz publiczny, druga to klucz prywatny
         return (e, n), (d, n)
+
+    def encrypt(self, e, n, message):
+        message_numbers = []
+        for char in message:
+            c = int(self.character_dict[char]) ** e % n
+            message_numbers.append(c)
+        return message_numbers
+
+    def decrypt(self, d, n, encrypted_message):
+        message_char_list = []
+        for number in encrypted_message:
+            c = number ** d % n
+            character = self.inverted_character_dict[c]
+            message_char_list.append(character)
+        return ''.join(message_char_list)
 
 
