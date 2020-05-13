@@ -63,7 +63,10 @@ class RSA:
         self.character_dict = {
             'A': 11, 'B': 12, 'C': 13, 'D': 14, 'E': 15, 'F': 16, 'G': 17, 'H': 18, 'I': 19,
             'J': 20, 'K': 21, 'L': 22, 'M': 23, 'N': 24, 'O': 25, 'P': 26, 'Q': 27, 'R': 28,
-            'S': 29, 'T': 30, 'U': 31, 'V': 32, 'W': 33, 'X': 34, 'Y': 35, 'Z': 36, ' ': 37
+            'S': 29, 'T': 30, 'U': 31, 'V': 32, 'W': 33, 'X': 34, 'Y': 35, 'Z': 36, ' ': 37,
+            'a': 38, 'b': 39, 'c': 40, 'd': 41, 'e': 42, 'f': 43, 'g': 44, 'h': 45, 'i': 46,
+            'j': 47, 'k': 48, 'l': 49, 'm': 50, 'n': 51, 'o': 52, 'p': 53, 'q': 54, 'r': 55,
+            's': 56, 't': 57, 'u': 58, 'v': 59, 'w': 60, 'x': 61, 'y': 62, 'z': 63, '.': 64,
 
         }
 
@@ -100,7 +103,9 @@ class RSA:
         d = EEAchecker.calculate()
 
         # Pierwsza krotka to klucz publiczny, druga to klucz prywatny
-        return (e, n), (d, n)
+        # return (e, n), (d, n)
+        keys = (e, d, n)
+        return keys
 
     def encrypt(self, e, n, message):
         # Każdy znak jest zamieniany według wzoru i wrzucany do listy
@@ -112,7 +117,7 @@ class RSA:
                 message_numbers.append(c)
         except KeyError:
             print("ENCRYPTION ERROR: CHARACTER VALUE DOES NOT EXIST\n")
-            return None
+            # return None
         # Gdy wszystko się uda, zwróc liste z zakodowanymi znakami w postaci liczb
         return message_numbers
 
@@ -125,7 +130,7 @@ class RSA:
             message_char_list = []
             # Odkodowywanie według wzoru
             for number in encrypted_message:
-                c = number ** d % n
+                c = int(number) ** d % n
                 # Sprawdź czy odkodowana liczba jest w słowniku, jeśli nie przydziel randomowy znak
                 try:
                     character = self.inverted_character_dict[c]

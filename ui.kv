@@ -1,7 +1,9 @@
 WindowManager:
     WindowMenu:
     WindowMorse:
+    WindowRSA:
     WindowCK:
+    WindowCL:
 
 
 <WindowMenu>:         # Okno menu głównego
@@ -19,6 +21,12 @@ WindowManager:
             spacing: 5
             padding: 10
 
+            Label:
+                text: ""
+
+            Label:
+                text: ""
+
             Button:
                 text:"Szyfrowanie Morsem"
                 on_release:
@@ -28,7 +36,7 @@ WindowManager:
             Button:
                 text:"Szyfrowanie RSA"
                 on_release:
-                    app.root.current = "win_morse"
+                    app.root.current = "win_rsa"
                     root.manager.transition.direction = "left"
 
             Button:
@@ -40,20 +48,10 @@ WindowManager:
             Button:
                 text:"Szyfrowanie Cezara - Liczbowe"
                 on_release:
-                    app.root.current = "win_ck"
+                    app.root.current = "win_cl"
                     root.manager.transition.direction = "left"
 
-            Button:
-                text:"Szyfrowanie Y"
-                on_release:
-                    app.root.current = "win_morse"
-                    root.manager.transition.direction = "left"
 
-            Button:
-                text:"Szyfrowanie Z"
-                on_release:
-                    app.root.current = "win_morse"
-                    root.manager.transition.direction = "left"
 
         Label:
             #text: "Projekt 2020 - Programowanie Obiektowe II\nPolitechnika Krakowska\n\n Michał Odrzywołek, Wojciech Strzeboński"
@@ -116,6 +114,116 @@ WindowManager:
 
             Label:
                 text:"Szyfrowanie Morsem"
+
+
+# OKNO: SZYFR RSA
+
+<WindowRSA>:
+    name: "win_rsa"
+
+    c_input: c_input
+    c_output: c_output
+    keyE: keyE
+    keyD: keyD
+    keyN: keyN
+    err_msg: err_msg
+
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+        pos: 0, 0
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst nieszyfrowany: "
+            TextInput:
+                id: c_input
+                multinline: True
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst zaszyfrowany: "
+            TextInput:
+                id: c_output
+                multiline: True
+
+        GridLayout:
+            cols:1
+            GridLayout:
+                cols:2
+
+                Label:
+                    id: err_msg
+                    color: 1, 0.1, 0.1, 1
+                    text:""
+
+                GridLayout:
+                    cols:4
+                    GridLayout:
+                        cols:1
+                        Label:
+                            text: "KLUCZE:"
+                        Button:
+                            text: "Generuj"
+                            on_press:
+                                root.btn_genkey()
+                    GridLayout:
+                        cols:1
+                        TextInput:
+                            multiline: False
+                            id: keyE
+                            font_size:12
+                            halign: 'center'
+                            valign: 'middle'
+                            background_color: 0.4,0.9,0.5,1
+                        Label:
+                            text: "E"
+                    GridLayout:
+                        cols:1
+                        TextInput:
+                            multiline: False
+                            id: keyD
+                            font_size:12
+                            halign: 'center'
+                            valign: 'middle'
+                            background_color: 0.4,0.9,0.5,1
+                        Label:
+                            text: "D"
+                    GridLayout:
+                        cols:1
+                        TextInput:
+                            multiline: False
+                            id: keyN
+                            font_size:12
+                            halign: 'center'
+                            valign: 'middle'
+                            background_color: 0.4,0.9,0.5,1
+                        Label:
+                            text: "N"
+
+
+            GridLayout:
+                cols:2
+
+                Button:
+                    text: "Szyfruj"
+                    on_press:
+                        root.btn_input()
+                Button:
+                    text: "Deszyfruj"
+                    on_press:
+                        root.btn_output()
+
+            Button:
+                text: "<<< Menu"
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+
+            Label:
+                text:"Szyfrowanie RSA"
 
 
 # OKNO: SZYFR CEZARA - KLASYCZNE
@@ -200,3 +308,86 @@ WindowManager:
             Label:
                 text:"Szyfrowanie Cezara - Klasyczne"
 
+
+
+# OKNO: SZYFR CEZARA - LICZBOWY
+
+<WindowCL>:
+    name: "win_cl"
+
+    c_input: c_input
+    c_output: c_output
+    key: key
+
+    GridLayout:
+        cols:1
+        size: root.width, root.height
+        pos: 0, 0
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst nieszyfrowany: "
+            TextInput:
+                id: c_input
+                multinline: True
+
+        GridLayout:
+            cols:2
+            Label:
+                text: "Tekst zaszyfrowany: "
+            TextInput:
+                id: c_output
+                multiline: True
+
+        GridLayout:
+            cols:1
+            GridLayout:
+                cols:2
+
+                Label:
+                    text: ""
+
+                GridLayout:
+                    cols:4
+                    Label:
+                        text: ""
+                    GridLayout:
+                        cols:1
+                        Label:
+                            text: "KLUCZ:"
+                        Button:
+                            text: "Generuj"
+                            on_press:
+                                root.btn_genkey()
+                    TextInput:
+                        multiline: False
+                        id: key
+                        font_size:20
+                        halign: 'center'
+                        valign: 'middle'
+                        background_color: 0.4,0.9,0.5,1
+                    Label:
+                        text: ""
+
+
+            GridLayout:
+                cols:2
+
+                Button:
+                    text: "Szyfruj"
+                    on_press:
+                        root.btn_input()
+                Button:
+                    text: "Deszyfruj"
+                    on_press:
+                        root.btn_output()
+
+            Button:
+                text: "<<< Menu"
+                on_release:
+                    app.root.current = "menu"
+                    root.manager.transition.direction = "right"
+
+            Label:
+                text:"Szyfrowanie Cezara - Liczbowe"
