@@ -45,7 +45,13 @@ class WindowRSA(Screen):
 	err_msg = ObjectProperty(None)
 
 	def btn_genkey(self):
-		rsa = cipher_RSA.RSA(89, 97)
+		primes = [73, 79, 83, 89, 97, 101, 103, 107, 109]
+		p = choice(primes)
+		q = choice(primes)
+		while p == q:
+			p = choice(primes)
+			q = choice(primes)
+		rsa = cipher_RSA.RSA(p, q)
 		rsa_keys = rsa.generate_keypair()
 		self.keyE.text = str(rsa_keys[0])
 		self.keyD.text = str(rsa_keys[1])
@@ -73,6 +79,8 @@ class WindowRSA(Screen):
 				self.c_input.text = str(rsa.decrypt(int(self.keyD.text), int(self.keyN.text), fixed_message))
 			except AttributeError:
 				self.err_msg.text = "ERROR!"
+			except ValueError:
+				self.err_msg.text = "Brak wiadomości..."
 
 
 class WindowCK(Screen):
