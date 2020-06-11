@@ -6,21 +6,47 @@ import cipher_RSA
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
+from kivy.clock import Clock
 from random import randint, choice
-import string
 
 
 # KLASY OKIEN
-
 class WindowMenu(Screen):
 	pass
+
 
 class WindowMorse(Screen):
 	c_input = ObjectProperty(None)
 	c_output = ObjectProperty(None)
 	err_msg = ObjectProperty(None)
+	flashlight = ObjectProperty(None)
+
+	def flash(self):
+		self.err_msg.text = "Trwa miganie..."
+		code = self.c_output.text
+		t = 0
+		for sym in code:
+			if sym == '.':
+				Clock.schedule_once(self.mig_on, t)
+				t += 0.3
+				Clock.schedule_once(self.mig_off, t)
+				t += 0.3
+			elif sym == '-':
+				Clock.schedule_once(self.mig_on, t)
+				t += 0.7
+				Clock.schedule_once(self.mig_off, t)
+				t += 0.3
+			else:
+				t += 0.3
+		self.err_msg.text = ""
+
+	def mig_on(self, *args):
+		self.flashlight.background_color = (1, 1, 1, 1)
+
+	def mig_off(self, *args):
+		self.flashlight.background_color = (0, 0, 0, 1)
+
 
 	def error_mess(self):
 		self.err_msg.text = "Wykryto nieoczekiwany znak specjalny!"

@@ -66,6 +66,7 @@ WindowManager:
     c_input: c_input
     c_output: c_output
     err_msg: err_msg
+    flashlight: flashlight
 
     GridLayout:
         cols:1
@@ -90,10 +91,25 @@ WindowManager:
 
         GridLayout:
             cols:1
-            Label:
-                id: err_msg
-                color: 1, 0.1, 0.1, 1
-                text:""
+            GridLayout:
+                cols:2
+                Label:
+                    id: err_msg
+                    color: 1, 0.1, 0.1, 1
+                    text:""
+                GridLayout:
+                    cols:2
+                    spacing: 5
+                    padding: 10
+                    Button:
+                        text: "Wymigaj"
+                        on_press:
+                            root.flash()
+                    TextInput:
+                        id: flashlight
+                        disabled: True
+                        background_color: 0, 0, 0, 1
+
 
             GridLayout:
                 cols:2
