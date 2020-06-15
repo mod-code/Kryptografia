@@ -47,7 +47,6 @@ class WindowMorse(Screen):
 	def mig_off(self, *args):
 		self.flashlight.background_color = (0, 0, 0, 1)
 
-
 	def error_mess(self):
 		self.err_msg.text = "Wykryto nieoczekiwany znak specjalny!"
 
@@ -84,8 +83,8 @@ class WindowRSA(Screen):
 		self.keyN.text = str(rsa_keys[2])
 
 	def btn_input(self):
-		if self.keyE.text == "":
-			self.err_msg.text = "Brak kluczy!"
+		if self.keyE.text == "" or self.keyN.text == "":
+			self.err_msg.text = "Brak wszystkich kluczy!"
 		else:
 			self.err_msg.text = ""
 			rsa = cipher_RSA.RSA(89, 97)
@@ -95,8 +94,8 @@ class WindowRSA(Screen):
 				self.err_msg.text = "ERROR!"
 
 	def btn_output(self):
-		if self.keyE.text == "":
-			self.err_msg.text = "Brak kluczy!"
+		if self.keyD.text == "" or self.keyN.text == "":
+			self.err_msg.text = "Brak wszystkich kluczy!"
 		else:
 			self.err_msg.text = ""
 			rsa = cipher_RSA.RSA(89, 97)
