@@ -83,7 +83,9 @@ class WindowRSA(Screen):
 		self.keyN.text = str(rsa_keys[2])
 
 	def btn_input(self):
-		if self.keyE.text == "" or self.keyN.text == "":
+		if self.keyN.text == "0":
+			self.err_msg.text = "Klucz N nie może przyjmowac wartosci 0!"
+		elif self.keyE.text == "" or self.keyN.text == "":
 			self.err_msg.text = "Brak wszystkich kluczy!"
 		else:
 			self.err_msg.text = ""
@@ -94,7 +96,9 @@ class WindowRSA(Screen):
 				self.err_msg.text = "ERROR!"
 
 	def btn_output(self):
-		if self.keyD.text == "" or self.keyN.text == "":
+		if self.keyN.text == "0":
+			self.err_msg.text = "Klucz N nie może przyjmowac wartosci 0!"
+		elif self.keyD.text == "" or self.keyN.text == "":
 			self.err_msg.text = "Brak wszystkich kluczy!"
 		else:
 			self.err_msg.text = ""

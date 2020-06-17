@@ -1,5 +1,6 @@
 # SZYFR CEZARA - LICZBOWY
 
+
 class CL:
 	def __init__(self):
 		pass
